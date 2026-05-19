@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: int_ecommerce__order_items_aggregated_to_order
+    description: >
+      Aggregates order item records to one row per order. This model makes line
+      item metrics safe to join into order-grain fact tables without duplicating
+      orders.
+    columns:
+      - name: order_id
+        description: Unique identifier for an order; the grain of this model.
+        data_tests:
+          - unique
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_ecommerce__orders')
+                field: order_id
+      - name: order_item_count
+        description: Number of product line items on the order.
+      - name: total_quantity
+        description: Total product quantity across all line items on the order.
+      - name: item_gross_sales_amount
+        description: Sum of quantity multiplied by unit price before line item discounts.
+      - name: item_discount_amount
+        description: Sum of line item discount amounts.
+      - name: item_net_sales_amount
+        description: Sum of line item totals after line item discounts.
