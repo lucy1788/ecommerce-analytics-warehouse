@@ -1,0 +1,15 @@
+payment_id,order_id,payment_date,payment_method,payment_status,payment_amount,transaction_id
+5001,1001,2025-04-01,credit_card,succeeded,55.67,txn_1001_01
+5002,1002,2025-04-02,paypal,succeeded,85.32,txn_1002_01
+5003,1003,2025-04-06,credit_card,succeeded,91.31,txn_1003_01
+5004,1003,2025-04-08,credit_card,refunded,-91.31,txn_1003_refund_01
+5005,1004,2025-04-07,shop_pay,succeeded,75.11,txn_1004_01
+5006,1005,2025-04-10,credit_card,voided,0.00,txn_1005_void_01
+5007,1006,2025-04-12,credit_card,succeeded,106.43,txn_1006_01
+5008,1007,2025-04-15,gift_card,succeeded,44.87,txn_1007_01
+5009,1008,2025-04-18,paypal,succeeded,64.31,txn_1008_01
+5010,1008,2025-04-20,paypal,refunded,-64.31,txn_1008_refund_01
+5011,1009,2025-04-20,credit_card,succeeded,103.68,txn_1009_01
+5012,1010,2025-04-21,credit_card,succeeded,21.11,txn_1010_01
+5013,1011,2025-04-25,paypal,voided,0.00,txn_1011_void_01
+5014,1012,2025-04-27,shop_pay,succeeded,54.59,txn_1012_01
