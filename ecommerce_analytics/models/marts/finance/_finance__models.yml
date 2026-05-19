@@ -69,3 +69,43 @@ models:
         description: Absolute value of refund payment amounts for the order.
       - name: net_revenue_amount
         description: Succeeded payment amounts plus negative refund transactions; voided payments contribute zero.
+
+  - name: mart_finance__daily_revenue
+    description: >
+      Daily finance revenue mart with one row per revenue date and currency.
+      Revenue is based on payment transaction dates, so refunds are recognized
+      on the date the refund transaction occurs.
+    columns:
+      - name: daily_revenue_id
+        description: Unique key for the revenue date and currency grain.
+        data_tests:
+          - unique
+          - not_null
+      - name: revenue_date
+        description: Payment transaction date used for daily finance reporting.
+        data_tests:
+          - not_null
+      - name: currency
+        description: Currency code for the daily revenue amounts.
+        data_tests:
+          - not_null
+      - name: payment_transaction_count
+        description: Number of payment, refund, or void transactions on the date.
+      - name: succeeded_payment_count
+        description: Number of successful payment transactions on the date.
+      - name: refund_payment_count
+        description: Number of refund transactions on the date.
+      - name: voided_payment_count
+        description: Number of voided payment transactions on the date.
+      - name: paid_order_count
+        description: Distinct orders with successful payment transactions on the date.
+      - name: refunded_order_count
+        description: Distinct orders with refund transactions on the date.
+      - name: voided_order_count
+        description: Distinct orders with voided payment transactions on the date.
+      - name: gross_revenue_amount
+        description: Sum of succeeded payment amounts for the date.
+      - name: refund_amount
+        description: Absolute value of refund payment amounts for the date.
+      - name: net_revenue_amount
+        description: Succeeded payment amounts plus negative refund transactions for the date.
