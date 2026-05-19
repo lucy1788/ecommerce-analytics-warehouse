@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: dim_products
+    description: >
+      Product dimension with one row per product. This model contains cleaned
+      product catalog attributes and simple product price/cost fields.
+    columns:
+      - name: product_id
+        description: Unique identifier for a product; the grain of this dimension.
+        data_tests:
+          - unique
+          - not_null
+      - name: product_name
+        description: Product display name.
+        data_tests:
+          - not_null
+      - name: category
+        description: Product category.
+      - name: subcategory
+        description: Product subcategory.
+      - name: brand
+        description: Product brand.
+      - name: sku
+        description: Product stock keeping unit.
+        data_tests:
+          - unique
+          - not_null
+      - name: unit_cost_amount
+        description: Estimated cost to the business for one unit.
+      - name: list_price_amount
+        description: Standard listed price for one unit.
+      - name: estimated_unit_margin_amount
+        description: List price minus unit cost.
+      - name: is_active
+        description: Whether the product is currently active in the catalog.
+        data_tests:
+          - not_null
+      - name: created_date
+        description: Date the product was created in the source system.
