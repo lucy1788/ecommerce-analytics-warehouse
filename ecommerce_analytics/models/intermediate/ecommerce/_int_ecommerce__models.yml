@@ -26,3 +26,33 @@ models:
         description: Sum of line item discount amounts.
       - name: item_net_sales_amount
         description: Sum of line item totals after line item discounts.
+
+  - name: int_ecommerce__payments_aggregated_to_order
+    description: >
+      Aggregates payment, refund, and void transactions to one row per order.
+      This model makes payment metrics safe to join into order-grain fact tables
+      without duplicating orders.
+    columns:
+      - name: order_id
+        description: Unique identifier for an order; the grain of this model.
+        data_tests:
+          - unique
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_ecommerce__orders')
+                field: order_id
+      - name: payment_transaction_count
+        description: Number of payment, refund, or void transactions tied to the order.
+      - name: succeeded_payment_count
+        description: Number of successful payment transactions tied to the order.
+      - name: refund_payment_count
+        description: Number of refund transactions tied to the order.
+      - name: voided_payment_count
+        description: Number of voided payment transactions tied to the order.
+      - name: gross_revenue_amount
+        description: Sum of succeeded payment amounts for the order.
+      - name: refund_amount
+        description: Absolute value of refund payment amounts for the order.
+      - name: net_revenue_amount
+        description: Succeeded payment amounts plus negative refund transactions; voided payments contribute zero.
