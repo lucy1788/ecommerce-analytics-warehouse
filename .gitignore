@@ -1,0 +1,15 @@
+# Python virtual environment
+.venv/
+
+# dbt runtime artifacts
+logs/
+target/
+dbt_packages/
+
+# Local DuckDB files
+*.duckdb
+*.duckdb.wal
+
+# OS/editor files
+.DS_Store
+Thumbs.db
