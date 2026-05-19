@@ -1,0 +1,9 @@
+customer_id,first_name,last_name,email,signup_date,country,state,city,marketing_channel,customer_status
+1,Ava,Martinez,ava.martinez@example.com,2025-01-12,US,CA,San Diego,paid_search,active
+2,Noah,Kim,noah.kim@example.com,2025-01-19,US,WA,Seattle,organic_search,active
+3,Maya,Patel,maya.patel@example.com,2025-02-03,US,NY,Brooklyn,email,active
+4,Liam,Johnson,liam.johnson@example.com,2025-02-17,US,TX,Austin,social,active
+5,Sophia,Garcia,sophia.garcia@example.com,2025-03-01,US,IL,Chicago,referral,active
+6,Ethan,Brown,ethan.brown@example.com,2025-03-08,US,CO,Denver,paid_social,active
+7,Olivia,Lee,olivia.lee@example.com,2025-03-22,US,MA,Boston,organic_search,inactive
+8,Lucas,Wilson,lucas.wilson@example.com,2025-04-05,US,OR,Portland,email,active

@@ -1,0 +1,9 @@
+product_id,product_name,category,subcategory,brand,sku,unit_cost,list_price,is_active,created_at
+101,Everyday Cotton T-Shirt,Apparel,Tops,Northstar Apparel,APP-TS-001,8.50,24.00,true,2024-11-15
+102,Classic Denim Jacket,Apparel,Outerwear,Northstar Apparel,APP-JK-002,34.00,89.00,true,2024-11-20
+103,Stainless Steel Water Bottle,Home & Kitchen,Drinkware,Trailhome,HOM-WB-003,6.25,22.00,true,2024-12-02
+104,Ceramic Dinner Plate Set,Home & Kitchen,Dinnerware,Trailhome,HOM-PL-004,18.75,54.00,true,2024-12-12
+105,Wireless Earbuds,Electronics,Audio,SoundPeak,EL-AU-005,28.00,79.00,true,2025-01-08
+106,USB-C Charging Cable,Electronics,Accessories,VoltEdge,EL-CB-006,3.40,14.00,true,2025-01-14
+107,Daily Hydration Moisturizer,Beauty,Skincare,GlowLab,BE-SK-007,9.10,32.00,true,2025-02-01
+108,Matte Lip Color,Beauty,Makeup,GlowLab,BE-MK-008,4.75,18.00,false,2025-02-09
