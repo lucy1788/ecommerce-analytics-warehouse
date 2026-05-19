@@ -38,3 +38,71 @@ models:
           - not_null
       - name: created_date
         description: Date the product was created in the source system.
+
+  - name: fct_order_items
+    description: >
+      Order item fact table with one row per product line item on an order. This
+      model supports product-level sales, discounts, recognized revenue, and
+      estimated gross profit analysis.
+    columns:
+      - name: order_item_id
+        description: Unique identifier for an order line item; the grain of this fact table.
+        data_tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: Order that contains the line item.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('fct_orders')
+                field: order_id
+      - name: customer_id
+        description: Customer who placed the order.
+        data_tests:
+          - not_null
+      - name: order_date
+        description: Date the order was placed.
+      - name: order_status
+        description: Current order status from the source order.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['completed', 'cancelled', 'refunded']
+      - name: product_id
+        description: Product on the line item.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_products')
+                field: product_id
+      - name: product_name
+        description: Product display name.
+      - name: category
+        description: Product category.
+      - name: subcategory
+        description: Product subcategory.
+      - name: brand
+        description: Product brand.
+      - name: sku
+        description: Product stock keeping unit.
+      - name: quantity
+        description: Quantity originally ordered on the line item.
+      - name: unit_price_amount
+        description: Unit selling price for the line item.
+      - name: item_gross_sales_amount
+        description: Quantity multiplied by unit price before line item discounts.
+      - name: item_discount_amount
+        description: Discount amount applied to the line item.
+      - name: item_net_sales_amount
+        description: Line item amount after discount.
+      - name: recognized_quantity
+        description: Quantity counted as sold for completed orders only.
+      - name: recognized_item_revenue_amount
+        description: Item revenue counted for completed orders only.
+      - name: estimated_item_cost_amount
+        description: Estimated cost for completed order lines using product unit cost.
+      - name: estimated_item_gross_profit_amount
+        description: Recognized item revenue minus estimated item cost.
