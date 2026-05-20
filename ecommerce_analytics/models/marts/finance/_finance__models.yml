@@ -1,0 +1,111 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: >
+      Order-level fact table with one row per order. This model combines order
+      attributes, item totals, and payment totals for revenue and order analysis.
+    columns:
+      - name: order_id
+        description: Unique identifier for an order; the grain of this fact table.
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: Customer who placed the order.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_ecommerce__customers')
+                field: customer_id
+      - name: order_date
+        description: Date the order was placed.
+      - name: order_status
+        description: Current order status from the source system.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['completed', 'cancelled', 'refunded']
+      - name: currency
+        description: Currency code for the order.
+      - name: is_completed_order
+        description: Boolean flag indicating completed orders.
+      - name: is_cancelled_order
+        description: Boolean flag indicating cancelled orders.
+      - name: is_refunded_order
+        description: Boolean flag indicating refunded orders.
+      - name: order_item_count
+        description: Number of product line items on the order.
+      - name: total_quantity
+        description: Total product quantity across all line items on the order.
+      - name: item_gross_sales_amount
+        description: Sum of line item quantity multiplied by unit price before line item discounts.
+      - name: item_discount_amount
+        description: Sum of line item discount amounts.
+      - name: item_net_sales_amount
+        description: Sum of line item totals after line item discounts.
+      - name: order_subtotal_amount
+        description: Source order subtotal amount before discounts, shipping, and tax.
+      - name: order_discount_amount
+        description: Source order-level discount amount.
+      - name: shipping_amount
+        description: Shipping amount charged on the order.
+      - name: tax_amount
+        description: Tax amount charged on the order.
+      - name: order_total_amount
+        description: Source order total including shipping and tax.
+      - name: payment_transaction_count
+        description: Number of payment, refund, or void transactions tied to the order.
+      - name: succeeded_payment_count
+        description: Number of successful payment transactions tied to the order.
+      - name: refund_payment_count
+        description: Number of refund transactions tied to the order.
+      - name: voided_payment_count
+        description: Number of voided payment transactions tied to the order.
+      - name: gross_revenue_amount
+        description: Sum of succeeded payment amounts for the order.
+      - name: refund_amount
+        description: Absolute value of refund payment amounts for the order.
+      - name: net_revenue_amount
+        description: Succeeded payment amounts plus negative refund transactions; voided payments contribute zero.
+
+  - name: mart_finance__daily_revenue
+    description: >
+      Daily finance revenue mart with one row per revenue date and currency.
+      Revenue is based on payment transaction dates, so refunds are recognized
+      on the date the refund transaction occurs.
+    columns:
+      - name: daily_revenue_id
+        description: Unique key for the revenue date and currency grain.
+        data_tests:
+          - unique
+          - not_null
+      - name: revenue_date
+        description: Payment transaction date used for daily finance reporting.
+        data_tests:
+          - not_null
+      - name: currency
+        description: Currency code for the daily revenue amounts.
+        data_tests:
+          - not_null
+      - name: payment_transaction_count
+        description: Number of payment, refund, or void transactions on the date.
+      - name: succeeded_payment_count
+        description: Number of successful payment transactions on the date.
+      - name: refund_payment_count
+        description: Number of refund transactions on the date.
+      - name: voided_payment_count
+        description: Number of voided payment transactions on the date.
+      - name: paid_order_count
+        description: Distinct orders with successful payment transactions on the date.
+      - name: refunded_order_count
+        description: Distinct orders with refund transactions on the date.
+      - name: voided_order_count
+        description: Distinct orders with voided payment transactions on the date.
+      - name: gross_revenue_amount
+        description: Sum of succeeded payment amounts for the date.
+      - name: refund_amount
+        description: Absolute value of refund payment amounts for the date.
+      - name: net_revenue_amount
+        description: Succeeded payment amounts plus negative refund transactions for the date.

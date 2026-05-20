@@ -1,0 +1,58 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: >
+      Customer dimension with one row per customer. This model combines customer
+      profile attributes with order and revenue summaries from fct_orders.
+    columns:
+      - name: customer_id
+        description: Unique identifier for a customer; the grain of this dimension.
+        data_tests:
+          - unique
+          - not_null
+      - name: first_name
+        description: Customer first name.
+      - name: last_name
+        description: Customer last name.
+      - name: customer_name
+        description: Customer full name, built from first and last name.
+      - name: email
+        description: Customer email address.
+        data_tests:
+          - unique
+          - not_null
+      - name: signup_date
+        description: Date the customer signed up.
+      - name: country
+        description: Customer country code.
+      - name: state
+        description: Customer state code.
+      - name: city
+        description: Customer city.
+      - name: marketing_channel
+        description: Channel that acquired the customer.
+      - name: customer_status
+        description: Current customer status.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['active', 'inactive']
+      - name: order_count
+        description: Total number of orders placed by the customer.
+      - name: completed_order_count
+        description: Number of completed orders placed by the customer.
+      - name: cancelled_order_count
+        description: Number of cancelled orders placed by the customer.
+      - name: refunded_order_count
+        description: Number of refunded orders placed by the customer.
+      - name: first_order_date
+        description: First date the customer placed an order.
+      - name: most_recent_order_date
+        description: Most recent date the customer placed an order.
+      - name: lifetime_gross_revenue_amount
+        description: Customer lifetime gross succeeded payment amount before refunds.
+      - name: lifetime_refund_amount
+        description: Customer lifetime refund amount.
+      - name: lifetime_net_revenue_amount
+        description: Customer lifetime net revenue after refunds.
